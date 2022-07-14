@@ -118,7 +118,6 @@ function ordenarProductos(productos) {
 
 }
 
-
 const productos = []
 
 
