@@ -23,7 +23,7 @@ if(promedio < 4){
 }else if(promedio >=7){
     alert("felicidades promocionaste la materia tu promedio es" +" "+ promedio,)
 }
-*/
+
 
 
 class Televisor {
@@ -52,10 +52,120 @@ class Televisor {
   //agregando objetos al array 
 
   televisores.push(tele5, tele6,tele7,tele8);
-  console.log(televisores);
+    console.log(televisores);
 
   //recorrer objetos y generar aumento del 10% en los precios
-  televisores.forEach(tele =>{
+ /* televisores.forEach(tele =>{
     tele.precio *=1.10
     console.log(tele)
  })
+ 
+
+ let consulta = televisores.some(televisor=> televisor.marca == "Philips")
+
+ if(consulta){
+    console.log(televisores.filter(televisor => televisor.marca == "Philips"))
+
+ }else{
+    console.log("no existen televisores con esa marca")
+ }
+*/
+
+/*-------------------------------------------------------*/
+//Primera entrega de proyecto
+
+class Producto {
+    constructor(nombre = "", marca = "", precio = 1, stock = 1) {
+        this.nombre = nombre
+        this.marca = marca
+        this.precio = precio
+        this.stock = stock
+    }
+}
+
+function buscarProducto(productos) {
+    let nombreProducto = prompt("Ingrese nombre de producto")
+
+    let productoBuscado = productos.find(producto => producto.nombre == nombreProducto)
+
+    if (productoBuscado == undefined) {
+        console.log("Producto no encontrado")
+    } else {
+        console.log(productoBuscado)
+    }
+}
+
+function buscarProductos(productos) {
+    let precio = parseFloat(prompt("Ingrese un precio"))
+    let productosBuscados = productos.filter(producto => producto.precio >= precio)
+
+    if (productosBuscados.length == 0) {
+        console.log("No se encontraron productos")
+    } else {
+        console.log(productosBuscados)
+    }
+}
+
+function ordenarProductos(productos) {
+
+    let metodoOrdenamiento = parseInt(prompt("Ingrese 1 para ordenar de menor a mayor, 2 para ordenar de mayor a menor"))
+
+    if (metodoOrdenamiento === 1) {
+        console.log(productos.sort((a, b) => a.precio - b.precio))
+    } else if (metodoOrdenamiento === 2) {
+        console.log(productos.sort((a, b) => b.precio - a.precio))
+    }
+
+}
+
+
+const productos = []
+
+
+let precio, stock, nombre, marca, continua, respuesta
+//pedir datos al usuario
+do {
+
+    do {
+        nombre = prompt("Ingrese nombre d producto").toLowerCase()
+        marca = prompt("Ingrese marca de producto").toLowerCase()
+
+    } while ((nombre.length == 0 || marca.length == 0))
+
+    //Validacion de precio y stock.
+    do {
+        precio = parseFloat(prompt("Ingrese precio de producto"))
+        stock = parseInt(prompt("Ingrese stock de producto"))
+
+    } while ((isNaN(precio) || isNaN(stock)) || (precio <= 0 || stock <= 0))
+
+    const producto = new Producto(nombre, marca, precio, stock)
+    productos.push(producto)
+    continua = prompt("¿Desea ingresar otro producto?").toLowerCase()
+} while (continua != "no")
+
+
+do {
+    respuesta = parseInt(prompt(`Ingrese numero para:
+        1- Buscar un producto
+        2- Buscar productos por precio
+        3- Ordenar de menor a mayor
+     
+    `))
+} while (respuesta < 1 || respuesta > 3)
+
+
+switch (respuesta) {
+    case 1:
+        buscarProducto(productos)
+        break
+    case 2:
+        buscarProductos(productos)
+        break
+    case 3:
+        ordenarProductos(productos)
+        break
+    default:
+        alert("Opcion no valida")
+        break
+}
